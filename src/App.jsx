@@ -2,7 +2,7 @@
 //  CINDYMARY COUTURE — App.jsx
 //  Full client & admin portal — connects to Railway backend
 // ═══════════════════════════════════════════════════════════
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import api from "./api.js";
 import "./App.css";
 
