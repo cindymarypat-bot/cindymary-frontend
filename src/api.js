@@ -10,7 +10,7 @@ async function req(path, options = {}, token = null) {
   const headers = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const res = await fetch(`${BASE}${path}`, { ...options, headers });
+  const res = await fetch(`${BASE}/${path.replace(/^\\//, "")}`, { ...options, headers });
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: "Request failed" }));
