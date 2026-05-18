@@ -902,6 +902,40 @@ function AdminPortal({ user, token, showToast }) {
             </Select>
           </FormGroup>
         </div>
+        <FormGroup label="Start Date">
+  <Input
+    type="date"
+    value={form.start_date || ""}
+    onChange={e => setForm(f => ({ ...f, start_date: e.target.value }))}
+  />
+</FormGroup>
+
+<FormGroup label="Agreed Delivery Date">
+  <Input
+    type="date"
+    value={form.agreed_delivery_date || ""}
+    onChange={e => setForm(f => ({ ...f, agreed_delivery_date: e.target.value }))}
+  />
+</FormGroup>
+
+<FormGroup label="Measurements">
+  <Textarea
+    rows={3}
+    value={form.measurements || ""}
+    placeholder="e.g. Bust: 34, Waist: 26, Hip: 38..."
+    onChange={e => setForm(f => ({ ...f, measurements: e.target.value }))}
+  />
+</FormGroup>
+
+<FormGroup label="Style Reference Notes">
+  <Textarea
+    rows={3}
+    value={form.style_reference_notes || ""}
+    placeholder="Describe style or paste image link..."
+    onChange={e => setForm(f => ({ ...f, style_reference_notes: e.target.value }))}
+  />
+</FormGroup>
+        
         <FormGroup label="Notes & Special Instructions">
           <Textarea rows={3} value={form.notes||""} placeholder="Colours, deadlines, references…"
             onChange={e=>setForm(f=>({...f,notes:e.target.value}))} />
