@@ -26,8 +26,7 @@ export const api = {
   health: () => req("/health"),
 
   // Login — returns { token, user }
-  login: (email, password) =>
-    req("/login", { method: "POST", body: JSON.stringify({ email, password }) }),
+  req("/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }),
 
   // ── Orders ─────────────────────────────────────────────────
   // Get all orders (admin) or own order (client)
