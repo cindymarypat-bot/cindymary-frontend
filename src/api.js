@@ -3,7 +3,7 @@
 //  Connects to Railway backend via VITE_API_URL
 // ═══════════════════════════════════════════════════════════
 
-const BASE = import.meta.env.VITE_API_URL || "";
+const BASE = "https://cindymary-backend-production.up.railway.app";
 
 // ── Core fetch wrapper ──────────────────────────────────────
 async function req(path, options = {}, token = null) {
