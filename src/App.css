@@ -559,7 +559,26 @@
 }
 @media (max-width: 660px) {
   .sidebar   { display: none; }
-  .main      { padding: 16px; }
+  
+   .shell {
+  display: block !important;
+  height: auto;
+  overflow: visible;
+}
+
+.main {
+  width: 100%;
+  padding: 16px;
+  overflow-x: hidden;
+}
+
+.page-content {
+  max-width: 100%;
+}
+
+.card {
+  overflow-x: auto;
+}
   .topbar    { padding: 0 16px; }
   .brand-couture { display: none; }
   .stats-grid--4,.stats-grid--3 { grid-template-columns: 1fr; }
