@@ -397,6 +397,9 @@ function LoginPage({ onLogin, showToast }) {
             <a href="https://bit.ly/DressConsultation" target="_blank" rel="noreferrer">
               New client? Book a Consultation →
             </a>
+            <a href="https://bit.ly/CindymaryPriceGuide" target="_blank" rel="noreferrer">
+  View Price Guide →
+</a>
           </div>
         </form>
 
