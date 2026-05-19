@@ -154,6 +154,9 @@ function Toast({ toast }) {
 function Topbar({ user, onLogout }) {
   return (
     <header className="topbar">
+      <button className="menu-btn">
+  ☰
+</button>
       <div className="topbar-brand">
         <span className="brand-cindy">CINDY</span>
         <span className="brand-mary">MARY</span>
