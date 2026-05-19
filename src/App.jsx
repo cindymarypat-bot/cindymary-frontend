@@ -151,10 +151,10 @@ function Toast({ toast }) {
   );
 }
 
-function Topbar({ user, onLogout }) {
+function Topbar({ user, onLogout, onMenuClick }) {
   return (
     <header className="topbar">
-      <button className="menu-btn">
+      <button className="menu-btn" onClick={onMenuClick}>
   ☰
 </button>
       <div className="topbar-brand">
