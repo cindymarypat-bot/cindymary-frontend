@@ -917,7 +917,29 @@ function AdminPortal({ user, token, showToast }) {
     onChange={e => setForm(f => ({ ...f, agreed_delivery_date: e.target.value }))}
   />
 </FormGroup>
-
+<FormGroup label="Custom Stage Days">
+  <div>
+    {STAGES.map(s => (
+      <div key={s.id} style={{ marginBottom: "12px" }}>
+        <label>{s.icon} {s.label}</label>
+        <Input
+          type="number"
+          min="0"
+          value={form.stage_days?.[s.id] ?? s.days}
+          onChange={e =>
+            setForm(f => ({
+              ...f,
+              stage_days: {
+                ...(f.stage_days || {}),
+                [s.id]: Number(e.target.value)
+              }
+            }))
+          }
+        />
+      </div>
+    ))}
+  </div>
+</FormGroup>
 <FormGroup label="Measurements">
   <Textarea
     rows={3}
