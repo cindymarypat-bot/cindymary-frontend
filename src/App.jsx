@@ -40,11 +40,13 @@ function buildTimeline(order) {
     delayMap[d.stage_id] = (delayMap[d.stage_id] || 0) + d.days;
   });
 
-  let cursor = new Date(order.stage_started || order.created_at);
-  return STAGES.map(s => {
-    const delay = delayMap[s.id] || 0;
-    const start = new Date(cursor);
-    const end   = addDays(cursor, s.days + delay);
+  let cursor = new Date(order.start_date || order.stage_started || order.created_at);
+return STAGES.map(s => {
+  const delay = delayMap[s.id] || 0;
+  const customDays = order.stage_days?.[s.id];
+  const stageDays = customDays ?? s.days;
+  const start = new Date(cursor);
+  const end = addDays(cursor, stageDays + delay);
     cursor = end;
     return { ...s, start, end, delay };
   });
