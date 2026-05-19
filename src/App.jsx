@@ -51,6 +51,26 @@ return STAGES.map(s => {
     return { ...s, start, end, delay };
   });
 }
+function deliveryRisk(order) {
+  if (!order?.agreed_delivery_date) return null;
+
+  const timeline = buildTimeline(order);
+  const finalStage = timeline[timeline.length - 1];
+
+  const finalDate = new Date(finalStage.end);
+  const agreedDate = new Date(order.agreed_delivery_date);
+
+  if (finalDate <= agreedDate) return null;
+
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const daysLate = Math.ceil((finalDate - agreedDate) / msPerDay);
+
+  return {
+    daysLate,
+    finalDate,
+    agreedDate
+  };
+}
 
 function stageProgress(order) {
   const done = (order.stage_history || []).length;
@@ -1037,6 +1057,23 @@ function AdminPortal({ user, token, showToast }) {
 
           <div className="manage-divider"/>
 
+          {(() => {
+  const risk = deliveryRisk(sel);
+  if (!risk) return null;
+
+  return (
+    <div style={{
+      background: "#2a1a1a",
+      border: "1px solid #ff4d4f",
+      padding: "10px",
+      borderRadius: "6px",
+      marginBottom: "12px",
+      color: "#ffccc7"
+    }}>
+      ⚠️ Delivery risk: {risk.daysLate} day(s) late
+    </div>
+  );
+})()}
           {/* Full tracking */}
           <div className="manage-section-label">Full Progress</div>
           <TrackingRail order={sel} />
