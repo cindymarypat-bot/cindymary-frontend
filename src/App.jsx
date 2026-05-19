@@ -463,6 +463,11 @@ function ClientPortal({ user, token }) {
           <a href="https://bit.ly/DressConsultation" target="_blank" rel="noreferrer">
             <button className="btn btn-gold">Book a Consultation →</button>
           </a>
+          <a href="https://bit.ly/CindymaryPriceGuide" target="_blank" rel="noreferrer">
+  <button className="btn btn-ghost" style={{ marginTop: "10px" }}>
+    View Price Guide
+  </button>
+</a>
         </div>
       </div>
     </div>
