@@ -48,6 +48,16 @@
 .btn-link    { background: none; border: none; color: var(--chp); font-size: 12px;
                cursor: pointer; padding: 0; letter-spacing: 0; text-transform: none; }
 .btn-link:hover { opacity: .7; }
+.menu-btn {
+  background: transparent;
+  border: 1px solid var(--mst);
+  color: var(--chp);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px 9px;
+  border-radius: 8px;
+  margin-right: 8px;
+}
 
 /* ── SHELL / SIDEBAR ────────────────────────────────────────── */
 .shell {
