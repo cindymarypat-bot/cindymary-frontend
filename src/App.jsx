@@ -422,7 +422,7 @@ function LoginPage({ onLogin, showToast }) {
 // ═══════════════════════════════════════════════════════════
 //  CLIENT PORTAL
 // ═══════════════════════════════════════════════════════════
-function ClientPortal({ user, token }) {
+function ClientPortal({ user, token, menuOpen, setMenuOpen }) {
   const [tab, setTab]     = useState("overview");
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -485,7 +485,7 @@ function ClientPortal({ user, token }) {
 
   return (
     <div className="shell">
-      <Sidebar items={navGroups} active={tab} onSelect={setTab} menuOpen={menuOpen}
+      <Sidebar items={navGroups} active={tab} onSelect={(key) => { setTab(key); setMenuOpen(false); }} menuOpen={menuOpen}
         bottom={
           <div className="sidebar-user-card">
             <div className="sidebar-user-name">{user.name}</div>
@@ -651,7 +651,7 @@ function ClientPortal({ user, token }) {
 // ═══════════════════════════════════════════════════════════
 //  ADMIN PORTAL
 // ═══════════════════════════════════════════════════════════
-function AdminPortal({ user, token, showToast, menuOpen }) {
+function AdminPortal({ user, token, showToast, menuOpen, setMenuOpen }) {
   const [tab, setTab]       = useState("dashboard");
   const [orders, setOrders] = useState([]);
   const [stats, setStats]   = useState({});
@@ -807,7 +807,7 @@ function AdminPortal({ user, token, showToast, menuOpen }) {
 
   return (
     <div className="shell">
-      <Sidebar items={navGroups} active={tab} onSelect={setTab} menuOpen={menuOpen}
+      <Sidebar items={navGroups} active={tab} onSelect={(key) => { setTab(key); setMenuOpen(false); }} menuOpen={menuOpen}
         bottom={<div className="sidebar-user-card"><div className="sidebar-user-name">Admin</div><div className="sidebar-user-id">Cindymary Couture</div></div>}
       />
 
@@ -1303,8 +1303,8 @@ export default function App() {
     <>
       {auth && <Topbar user={auth} onLogout={handleLogout} onMenuClick={() => setMenuOpen(true)} />}
       {!auth && <LoginPage onLogin={handleLogin} showToast={showToast} />}
-      {isClient && <ClientPortal user={auth} token={auth.token} />}
-      {isAdmin && <AdminPortal user={auth} token={auth.token} showToast={showToast} menuOpen={menuOpen} />}
+      {isClient && <ClientPortal user={auth} token={auth.token} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />}
+      {isAdmin && <AdminPortal user={auth} token={auth.token} showToast={showToast} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />}
       <Toast toast={toast} />
     </>
   );
