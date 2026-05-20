@@ -651,7 +651,7 @@ function ClientPortal({ user, token }) {
 // ═══════════════════════════════════════════════════════════
 //  ADMIN PORTAL
 // ═══════════════════════════════════════════════════════════
-function AdminPortal({ user, token, showToast }) {
+function AdminPortal({ user, token, showToast, menuOpen }) {
   const [tab, setTab]       = useState("dashboard");
   const [orders, setOrders] = useState([]);
   const [stats, setStats]   = useState({});
@@ -807,7 +807,7 @@ function AdminPortal({ user, token, showToast }) {
 
   return (
     <div className="shell">
-      <Sidebar items={navGroups} active={tab} onSelect={setTab}
+      <Sidebar items={navGroups} active={tab} onSelect={setTab} menuOpen={menuOpen}
         bottom={<div className="sidebar-user-card"><div className="sidebar-user-name">Admin</div><div className="sidebar-user-id">Cindymary Couture</div></div>}
       />
 
@@ -1304,7 +1304,7 @@ export default function App() {
       {auth && <Topbar user={auth} onLogout={handleLogout} onMenuClick={() => setMenuOpen(true)} />}
       {!auth && <LoginPage onLogin={handleLogin} showToast={showToast} />}
       {isClient && <ClientPortal user={auth} token={auth.token} />}
-      {isAdmin  && <AdminPortal  user={auth} token={auth.token} showToast={showToast} />}
+      {isAdmin && <AdminPortal user={auth} token={auth.token} showToast={showToast} menuOpen={menuOpen} />}
       <Toast toast={toast} />
     </>
   );
