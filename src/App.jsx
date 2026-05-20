@@ -784,14 +784,16 @@ function AdminPortal({ user, token, showToast, menuOpen, setMenuOpen }) {
     setSaving(false);
   }
 
-  const uk  = orders.filter(o => o.location==="UK");
-  const ng  = orders.filter(o => o.location==="Nigeria");
-  const vis = tab==="uk" ? uk : tab==="nigeria" ? ng : orders;
+  const uk = orders.filter(o => o.location==="UK");
+const ng = orders.filter(o => o.location==="Nigeria");
+const delayed = orders.filter(o => deliveryRisk(o));
+const vis = tab==="uk" ? uk : tab==="nigeria" ? ng : tab==="delays" ? delayed : orders;
 
   const navGroups = [
     { label:"Dashboard", items:[
       { key:"dashboard", label:"Overview",         icon:"◈" },
       { key:"orders",    label:"All Orders",       icon:"◉" },
+      { key:"delays", label:"Delayed Orders", icon:"⚠️", badge: delayed.length },
       { key:"uk",        label:"UK Production",    icon:"▦", badge: uk.length },
       { key:"nigeria",   label:"Nigeria Prod.",    icon:"▦", badge: ng.length },
       { key:"booking",   label:"New Booking",      icon:"＋" },
