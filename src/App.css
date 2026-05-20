@@ -558,7 +558,18 @@
   .modal-form-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 660px) {
-  .sidebar   { display: none; }
+  .sidebar {
+  position: fixed;
+  left: -100%;
+  top: 0;
+  height: 100%;
+  width: 260px;
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+   .sidebar.open {
+  left: 0;
+}
   
    .shell {
   display: block !important;
