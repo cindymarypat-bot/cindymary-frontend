@@ -176,9 +176,9 @@ function Topbar({ user, onLogout, onMenuClick }) {
   );
 }
 
-function Sidebar({ items, active, onSelect, bottom }) {
+function Sidebar({ items, active, onSelect, bottom, menuOpen }) {
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
       <nav className="sidebar-nav">
         {items.map(group => (
           <div key={group.label} className="sidebar-group">
@@ -485,7 +485,7 @@ function ClientPortal({ user, token }) {
 
   return (
     <div className="shell">
-      <Sidebar items={navGroups} active={tab} onSelect={setTab}
+      <Sidebar items={navGroups} active={tab} onSelect={setTab} menuOpen={menuOpen}
         bottom={
           <div className="sidebar-user-card">
             <div className="sidebar-user-name">{user.name}</div>
@@ -1277,6 +1277,7 @@ export default function App() {
     } catch { return null; }
   });
   const [toast, setToast] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const toastTimer = React.useRef(null);
 
   function showToast(msg, type="success") {
@@ -1300,7 +1301,7 @@ export default function App() {
 
   return (
     <>
-      {auth && <Topbar user={auth} onLogout={handleLogout} />}
+      {auth && <Topbar user={auth} onLogout={handleLogout} onMenuClick={() => setMenuOpen(true)} />}
       {!auth && <LoginPage onLogin={handleLogin} showToast={showToast} />}
       {isClient && <ClientPortal user={auth} token={auth.token} />}
       {isAdmin  && <AdminPortal  user={auth} token={auth.token} showToast={showToast} />}
