@@ -503,9 +503,20 @@ function ClientPortal({ user, token, menuOpen, setMenuOpen }) {
         {/* ── OVERVIEW ─────────────────────────────── */}
         {tab === "overview" && (
           <div className="page-content">
-            {clientOrders.length > 1 && (
+            <div className="welcome-banner">
+              <div className="welcome-text">
+                <div className="welcome-greeting">Welcome back,</div>
+                <div className="welcome-name">{user.name.split(" ")[0]}</div>
+                <div className="welcome-sub">Your {order.garment} is being crafted with love</div>
+              </div>
+              <div className="welcome-ornament">✦</div>
+            </div>
+{clientOrders.length > 1 && (
   <div className="order-switcher">
     <div className="section-title">Your Orders</div>
+    <div className="page-sub" style={{ marginBottom: "12px" }}>
+  Select an order to view its progress and updates.
+</div>
 
     {clientOrders.map(o => (
       <button
@@ -518,15 +529,6 @@ function ClientPortal({ user, token, menuOpen, setMenuOpen }) {
     ))}
   </div>
 )}
-            <div className="welcome-banner">
-              <div className="welcome-text">
-                <div className="welcome-greeting">Welcome back,</div>
-                <div className="welcome-name">{user.name.split(" ")[0]}</div>
-                <div className="welcome-sub">Your {order.garment} is being crafted with love</div>
-              </div>
-              <div className="welcome-ornament">✦</div>
-            </div>
-
             <div className="stats-grid stats-grid--3">
               <StatCard label="Current Stage" value={`${curStage?.icon} ${curStage?.label}`} accent />
               <StatCard label="Overall Progress" value={`${pct}%`}
