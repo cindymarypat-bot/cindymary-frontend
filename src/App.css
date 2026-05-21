@@ -606,3 +606,13 @@
   .login-bg-ornament { display: none; }
   .manage-delay-grid { grid-template-columns: 1fr; }
 }
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
