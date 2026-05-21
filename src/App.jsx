@@ -425,6 +425,7 @@ function LoginPage({ onLogin, showToast }) {
 function ClientPortal({ user, token, menuOpen, setMenuOpen }) {
   const [tab, setTab]     = useState("overview");
   const [order, setOrder] = useState(null);
+  const [clientOrders, setClientOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const isDemo = token === "demo";
@@ -438,7 +439,10 @@ function ClientPortal({ user, token, menuOpen, setMenuOpen }) {
       return;
     }
     api.getOrders(token)
-  .then(orders => setOrder((orders || [])[0] || null))
+  .then(orders => {
+    setClientOrders(orders || []);
+    setOrder((orders || [])[0] || null);
+  })
   .catch(console.error)
       .finally(() => setLoading(false));
   }, [token, user.orderId, isDemo]);
@@ -499,6 +503,21 @@ function ClientPortal({ user, token, menuOpen, setMenuOpen }) {
         {/* ── OVERVIEW ─────────────────────────────── */}
         {tab === "overview" && (
           <div className="page-content">
+            {clientOrders.length > 1 && (
+  <div className="order-switcher">
+    <div className="section-title">Your Orders</div>
+
+    {clientOrders.map(o => (
+      <button
+        key={o.id}
+        className={`btn ${order?.id === o.id ? "btn-gold" : "btn-ghost"} btn-block`}
+        onClick={() => setOrder(o)}
+      >
+        {o.garment} — {o.id}
+      </button>
+    ))}
+  </div>
+)}
             <div className="welcome-banner">
               <div className="welcome-text">
                 <div className="welcome-greeting">Welcome back,</div>
