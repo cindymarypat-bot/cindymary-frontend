@@ -757,8 +757,8 @@ function AdminPortal({ user, token, showToast, menuOpen, setMenuOpen }) {
   }
 
   async function handleCreate() {
-    const { client_name, client_email, garment, location } = form;
-    if (!client_name||!client_email||!garment||!location) {
+    const { client_name, client_email, client_password, garment, location } = form;
+    if (!client_name || !client_email || !client_password || !garment || !location) {
       showToast("Fill in all required fields","error"); return;
     }
     setSaving(true);
@@ -920,6 +920,13 @@ const vis = tab==="uk" ? uk : tab==="nigeria" ? ng : tab==="delays" ? delayed : 
           <FormGroup label="Email Address *">
             <Input type="email" value={form.client_email||""} onChange={e=>setForm(f=>({...f,client_email:e.target.value}))} placeholder="client@email.com" />
           </FormGroup>
+          <FormGroup label="Client Temporary Password *">
+  <Input
+    value={form.client_password || ""}
+    onChange={e=>setForm(f=>({...f, client_password:e.target.value}))}
+    placeholder="e.g. client123"
+  />
+</FormGroup>
           <FormGroup label="Phone Number">
             <Input value={form.client_phone||""} onChange={e=>setForm(f=>({...f,client_phone:e.target.value}))} placeholder="+234 or +44…" />
           </FormGroup>
