@@ -437,9 +437,9 @@ function ClientPortal({ user, token, menuOpen, setMenuOpen }) {
       setLoading(false);
       return;
     }
-    api.getOrders(token)
-      .then(orders => setOrder(orders[0] || null))
-      .catch(console.error)
+    api.getOrder(user.orderId, token)
+  .then(order => setOrder(order || null))
+  .catch(console.error)
       .finally(() => setLoading(false));
   }, [token, user.orderId, isDemo]);
 
