@@ -786,13 +786,13 @@ function AdminPortal({ user, token, showToast, menuOpen, setMenuOpen }) {
 
   const uk = orders.filter(o => o.location==="UK");
 const ng = orders.filter(o => o.location==="Nigeria");
-const delayed = orders.filter(o => deliveryRisk(o));
+const delayed = orders.filter(o => (o.delays || []).length > 0);
 const vis = tab==="uk" ? uk : tab==="nigeria" ? ng : tab==="delays" ? delayed : orders;
 
   const navGroups = [
     { label:"Dashboard", items:[
       { key:"dashboard", label:"Overview",         icon:"◈" },
-      { key:"orders",    label:"All Orders",       icon:"◉" },
+      { key:"orders", label:"All Orders", icon:"◎", badge: orders.length },
       { key:"delays", label:"Delayed Orders", icon:"⚠️", badge: delayed.length },
       { key:"uk",        label:"UK Production",    icon:"▦", badge: uk.length },
       { key:"nigeria",   label:"Nigeria Prod.",    icon:"▦", badge: ng.length },
@@ -850,11 +850,11 @@ const vis = tab==="uk" ? uk : tab==="nigeria" ? ng : tab==="delays" ? delayed : 
         )}
 
         {/* ── ORDERS / UK / NIGERIA ────────────────── */}
-        {(tab==="orders"||tab==="uk"||tab==="nigeria") && (
+        {(tab==="orders"||tab==="uk"||tab==="nigeria"||tab==="delays") && (
           <div className="page-content">
             <div className="page-header">
               <h1 className="page-title">
-                {tab==="uk"?"UK Production":tab==="nigeria"?"Nigeria Production":"All Orders"}
+                {tab==="uk"?"UK Production":tab==="nigeria"?"Nigeria Production":tab==="delays"?"Delayed Orders":"All Orders"}
               </h1>
               <div className="page-sub">{vis.length} order{vis.length!==1?"s":""}</div>
             </div>
